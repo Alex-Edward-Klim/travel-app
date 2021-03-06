@@ -7,7 +7,7 @@ function Footer() {
         <footer className="footer">
             <div className="footer__container">
                 <a className="footer__logo" href="https://rs.school/js/">
-                    <img className="footer__logo__img" src={logoSrc} />
+                    <img className="footer__logo__img" alt="rs school" src={logoSrc} />
                 </a>
                 <p className="footer__authors">
                     <span>by</span>
