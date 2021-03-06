@@ -1,9 +1,10 @@
 import React from "react";
 import "./mainPageCountries.scss";
+import CountryCard from "../countryCard/CountryCard"
 
 function MainPageCountries() {
 
-  // const countriesCards = data.map((country, i) => <CountryCard key={i} />)
+  //todo const countriesCards = data.map((country, i) => <CountryCard key={i} ... />)
 
   return (
     <main className="mainPage-main">
@@ -19,8 +20,16 @@ function MainPageCountries() {
         </p>
         <div className="mainPage-main__countries countries-container">
           {
-            //{countriesCards}
+            //todo {countriesCards}
           }
+          <CountryCard />
+          <CountryCard />
+          <CountryCard />
+          <CountryCard />
+          <CountryCard />
+          <CountryCard />
+          <CountryCard />
+          <CountryCard />
         </div>
       </div>
     </main>
