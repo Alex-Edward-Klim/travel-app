@@ -1,16 +1,14 @@
 import React from "react";
 import DateInCapital from "../dateInCapital/DateInCapital";
-import LocalCurrencyRate from "../localCurrencyRate/LocalCurrencyRate";
 
-function Widgets() {
+function WidgetsWrapper() {
     // todo get data from json
     const countryInfo = {region: "Europe", capital: "Paris"}
     return(
-        <div className="widgets">
+        <div className="widgets-wrapper">
             <DateInCapital countryInfo={countryInfo}/>
-            <LocalCurrencyRate />
         </div>
     )
 }
 
-export default Widgets;
+export default WidgetsWrapper;
