@@ -1,11 +1,20 @@
-import React from "react"
-import MainPageCountries from "./components/mainPageCountries/MainPageCountries"
+import React from "react";
+
+import { Provider } from "react-redux";
+
+import store from "./redux/store";
+
+// import MainPageCountries from "./components/mainPageCountries/MainPageCountries";
+import TemporaryCountriesComponent from "./components/temporaryCountriesComponent/TemporaryCountriesComponent";
 
 function App() {
   return (
-    <>
-      <MainPageCountries />
-    </>
+    <Provider store={store}>
+      <>
+        {/* <MainPageCountries /> */}
+        <TemporaryCountriesComponent />
+      </>
+    </Provider>
   );
 }
 
