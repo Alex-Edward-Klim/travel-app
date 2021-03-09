@@ -1,10 +1,8 @@
 import React from "react";
 import "./dateInCapital.scss";
 
-function DateInCapital() {
-  // todo get values from props or json {region: "",capital: "", country: ""}
-  const countryInfo = { region: "Europe", capital: "Paris" };
-  const { region, capital } = countryInfo;
+function DateInCapital(props) {
+  const { region, capital } = props.countryInfo;
 
   const currentTimeZone = { timeZone: `${region}/${capital}` };
 
