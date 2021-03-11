@@ -83,9 +83,13 @@ function DateInCapital() {
   const currentLanguage = "EN";
 
 
-  const [hour, minute, second] = new Date()
+  let [hour, minute, second] = new Date()
     .toLocaleTimeString("en-US",{timeZone : currentTimeZone,  hour12: false })
     .split(/:| /);
+
+  const [currentHour, setCurrentHour] = useState(hour);
+  const [currentMinute, setCurrentMinute] = useState(minute);
+  const [currentSecond, setCurrentSecond] = useState(second);
 
   const addZero = (n) => {
     return (n < 10 ? "0" : "") + n;
@@ -104,7 +108,7 @@ function DateInCapital() {
 
   const capitalTime = (
     <p>
-      Time: {addZero(hour)}:{minute}:{second}
+      Time: {addZero(currentHour)}:{currentMinute}:{currentSecond}
     </p>
   );
 
@@ -114,18 +118,21 @@ function DateInCapital() {
     </p>
   );
 
-  // 
-  const [count, setCount] = useState(0);
-
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setCount(count + 1);
+      [hour, minute, second] = new Date()
+      .toLocaleTimeString("en-US",{timeZone : currentTimeZone,  hour12: false })
+      .split(/:| /);
+
+      setCurrentHour(hour)
+      setCurrentMinute(minute)
+      setCurrentSecond(second)
+      
     }, 1000);
     return () => {
       clearTimeout(timeout);
     };
   });
-
 
   return (
     <div className="date-in-capital">
