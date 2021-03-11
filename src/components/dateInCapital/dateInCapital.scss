@@ -1,6 +1,6 @@
 .date-in-capital {
-    width: 219px;
-    height: 81px;
+    width: 344px;
+    height: 124px;
 
     background: #ACCBA7;
     border-radius: 20px;
@@ -8,12 +8,34 @@
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 20px;
-    line-height: 23px;
+    font-size: 30px;
+    line-height: 35px;
     text-align: center;
 
     color: #514C4C; 
     &__item {
-        padding-top: 2px;
+        padding-top: 6px;
+    }
+}
+
+@media(max-width: 720px) {
+    .date-in-capital {
+        width: 219px;
+        height: 81px;
+    
+        background: #ACCBA7;
+        border-radius: 20px;
+        text-align: center;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 23px;
+        text-align: center;
+    
+        color: #514C4C; 
+        &__item {
+            padding-top: 2px;
+        }
     }
 }
