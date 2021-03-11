@@ -1,0 +1,43 @@
+.wrapper{
+  display: flex;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  color: #514C4C;
+  font-size: 24px;
+  height: 180px;
+  background: #ACCBA7;
+  border-radius: 20px;
+    &__weather{
+      width: 136px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+        &__img{
+          width: 100px;
+          height: 91px;
+        }
+        &__description{
+          font-size: 22px;
+        }
+    }
+    &__info{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+        &__temperature{
+          height: 41px;
+          font-weight: bold;
+          font-size: 40px;
+          line-height: 47px;
+        }
+        &__wind{
+          line-height: 28px;
+          height: 37px;
+        }
+        &__humidity{
+          line-height: 28px;
+          height: 37px;
+        }
+    }
+}
