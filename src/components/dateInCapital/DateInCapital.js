@@ -1,41 +1,137 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./dateInCapital.scss";
 
-function DateInCapital(props) {
-  const { region, capital } = props.countryInfo;
+function DateInCapital() {
+  const dayOfWeekList = {
+    EN: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
+    RU: [
+      "Воскресенье",
+      "Понедельник",
+      "Вторник",
+      "Среда",
+      "Четверг",
+      "Пятница",
+      "Суббота",
+    ],
+    BE: [
+      "Воскресенье",
+      "Панядзелак",
+      "Чацвер",
+      "Асяроддзе",
+      "Чацвер",
+      "Пятнiца",
+      "Субота",
+    ],
+  };
 
-  const currentTimeZone = { timeZone: `${region}/${capital}` };
+  const monthList = {
+    EN: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    RU: [
+      "Январь",
+      "Февраль",
+      "Марш",
+      "Апреля",
+      "Май",
+      "Июнь",
+      "Июль",
+      "Август",
+      "Сентябрь",
+      "Октябрь",
+      "Ноябрь",
+      "Декабрь",
+    ],
+    BE: [
+      "Студзень",
+      "Люты",
+      "Сакавік",
+      "Красавік",
+      "Май",
+      "Чэрвень",
+      "Ліпень",
+      "Жнівень",
+      "Верасень",
+      "Кастрычнік",
+      "Лістапад",
+      "Снежань",
+    ],
+  };
 
-  const [month, date, year] = new Date()
-    .toLocaleDateString("en-US", currentTimeZone)
-    .split("/");
+  // TODO: get values from JSON
+  const capital = "Paris";
+  const currentTimeZone = "Europe/Paris";
+  const currentLanguage = "EN";
 
-  const [hour, minute] = new Date()
-    .toLocaleTimeString("en-US", currentTimeZone)
+
+  const [hour, minute, second] = new Date()
+    .toLocaleTimeString("en-US",{timeZone : currentTimeZone,  hour12: false })
     .split(/:| /);
 
   const addZero = (n) => {
     return (n < 10 ? "0" : "") + n;
   };
 
+  const [month, date] = new Date()
+    .toLocaleDateString("en-US", currentTimeZone)
+    .split("/");
+
+  const day = new Date().getDay();
+
+  const dayOfWeek = dayOfWeekList[currentLanguage][day];
+  const monthName = monthList[currentLanguage][month - 1];
+
   const capitalTitle = <p className="date-in-capital__item">{capital}</p>;
-  const capitalDate = (
-    <p className="date-in-capital__item">
-      Date: {addZero(date)}.{addZero(month)}.{year}
-    </p>
-  );
+
   const capitalTime = (
-    <p className="date-in-capital__item">
-      Time: {addZero(hour)}:{addZero(minute)}
+    <p>
+      Time: {addZero(hour)}:{minute}:{second}
     </p>
   );
+
+  const capitalDate = (
+    <p>
+      {date} {monthName} {dayOfWeek}
+    </p>
+  );
+
+  // 
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setCount(count + 1);
+    }, 1000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  });
+
 
   return (
     <div className="date-in-capital">
       {capitalTitle}
-      {/* add zero before number in time and in date*/}
-      {capitalDate}
       {capitalTime}
+      {capitalDate}
     </div>
   );
 }

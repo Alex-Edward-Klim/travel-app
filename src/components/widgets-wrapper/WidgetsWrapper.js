@@ -6,7 +6,7 @@ function WidgetsWrapper() {
     const countryInfo = {region: "Europe", capital: "Paris"}
     return(
         <div className="widgets-wrapper">
-            <DateInCapital countryInfo={countryInfo}/>
+            <DateInCapital />
         </div>
     )
 }
