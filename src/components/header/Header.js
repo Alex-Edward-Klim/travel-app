@@ -7,9 +7,14 @@ import signInSrc from "../../images/icons/sign-in.png";
 import signUpSrc from "../../images/icons/sign-up.png";
 import logOutSrc from "../../images/icons/log-out.png";
 import userDefaultAvatar from "../../images/icons/user-default-avatar.png";
-
+import { useDispatch, useSelector } from "react-redux";
+import { changeLanguage } from "../../redux/language/languageActions";
 
 function Header() {
+  
+  const language = useSelector((state) => state.language.language);
+  const dispatch = useDispatch();
+
   const isSearchEnable = true;
   // todo: isSearchEnable from props
 
@@ -85,7 +90,18 @@ function Header() {
         <div className="header__left-wrapper">
           <div className="header__lang-wrapper">
             <img src={langSrc} alt="lang" className="header__lang-wrapper__img" />
-            {langName}
+            <select
+              value={language}
+              id="language"
+              onChange={(e) => {
+                localStorage.setItem("TravelAppUserLanguageData78fe8a83ef752bd23c98c262b7264947", e.target.value);
+                dispatch(changeLanguage(e.target.value))
+              }}
+            >
+              <option value="EN">EN</option>
+              <option value="RU">RU</option>
+              <option value="BE">BE</option>
+            </select>
           </div>
           <img alt="logo" src={logoHeaderSrc} className="header__logo"/>
         </div>
