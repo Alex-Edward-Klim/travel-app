@@ -1,11 +1,19 @@
 import React from "react";
 import "./mainPageCountries.scss";
-import CountryCard from "../countryCard/CountryCard"
+import { useSelector } from "react-redux";
+import CountryCard from "../countryCard/CountryCard";
 
 function MainPageCountries() {
-
-  //todo const countriesCards = data.map((country, i) => <CountryCard key={i} ... />)
-
+  const countries = useSelector((state) => state.countries.countries);
+  const countriesCards = countries.map((country, i) => (
+    <CountryCard
+      key={i}
+      name={country.localizations.RU.name}
+      capital={country.localizations.RU.capital}
+      imgUrl={country.firstImageUrl}
+      id={country.localizations.EN.name}
+    />
+  ));
   return (
     <main className="mainPage-main">
       <div className="mainPage-main__container">
@@ -19,17 +27,7 @@ function MainPageCountries() {
           you to familiarize yourself with them
         </p>
         <div className="mainPage-main__countries countries-container">
-          {
-            //todo {countriesCards}
-          }
-          <CountryCard />
-          <CountryCard />
-          <CountryCard />
-          <CountryCard />
-          <CountryCard />
-          <CountryCard />
-          <CountryCard />
-          <CountryCard />
+          {countriesCards}
         </div>
       </div>
     </main>

@@ -4,12 +4,17 @@ $text-color-title: #514c4c;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
+a { 
+  text-decoration: none;
+}
 .mainPage-main {
   font-family: Roboto, sans-serif;
   text-align: center;
   color: black;
+  min-height: calc(100vh - 284px);
   &__container {
     margin: 38px auto 54px;
     display: flex;
