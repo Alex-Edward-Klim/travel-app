@@ -77,6 +77,10 @@ function DateInCapital() {
     ],
   };
 
+  const [currentHour, setCurrentHour] = useState("0");
+  const [currentMinute, setCurrentMinute] = useState("00");
+  const [currentSecond, setCurrentSecond] = useState("00");
+
   // TODO: get values from JSON
   const capital = "Paris";
   const currentTimeZone = "Europe/Paris";
@@ -86,11 +90,7 @@ function DateInCapital() {
   let [hour, minute, second] = new Date()
     .toLocaleTimeString("en-US",{timeZone : currentTimeZone,  hour12: false })
     .split(/:| /);
-
-  const [currentHour, setCurrentHour] = useState(hour);
-  const [currentMinute, setCurrentMinute] = useState(minute);
-  const [currentSecond, setCurrentSecond] = useState(second);
-
+  
   const addZero = (n) => {
     return (n < 10 ? "0" : "") + n;
   };
