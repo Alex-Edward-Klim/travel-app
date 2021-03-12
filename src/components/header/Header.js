@@ -9,10 +9,11 @@ import logOutSrc from "../../images/icons/log-out.png";
 import userDefaultAvatar from "../../images/icons/user-default-avatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage } from "../../redux/language/languageActions";
+import {getLanguageFromState} from "../../redux/selectors"
 
 function Header() {
   
-  const language = useSelector((state) => state.language.language);
+  const language = useSelector(getLanguageFromState);
   const dispatch = useDispatch();
 
   const isSearchEnable = true;

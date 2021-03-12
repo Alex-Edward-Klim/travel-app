@@ -13,6 +13,7 @@ import MainPageCountries from "../mainPageCountries/MainPageCountries";
 import SelectCountry from "../selectCountry/SelectCountry";
 import Footer from "../footer/Footer";
 import { changeLanguage } from "../../redux/language/languageActions";
+import ScrollToTop from "../scrollToTop/ScrollToTop";
 
 const Container = (props) => {
   useEffect(() => {
@@ -29,6 +30,7 @@ const Container = (props) => {
         <>
           {/* <TemporaryCountriesComponent /> */}
           <BrowserRouter>
+            <ScrollToTop />
             <Header />
             <Switch>
               <Route render={() => <MainPageCountries />} path="/" exact/>

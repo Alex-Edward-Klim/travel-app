@@ -1,4 +1,8 @@
-import { CHANGE_LANGUAGE_TO_BE, CHANGE_LANGUAGE_TO_EN, CHANGE_LANGUAGE_TO_RU } from "./languageTypes";
+import {
+  CHANGE_LANGUAGE_TO_BE,
+  CHANGE_LANGUAGE_TO_EN,
+  CHANGE_LANGUAGE_TO_RU,
+} from "./languageTypes";
 
 // Action Creators
 
@@ -19,11 +23,10 @@ export const changeLanguage = (lang) => {
     case "EN":
       return changeLanguageToEn();
     case "RU":
-    return changeLanguageToRu();
+      return changeLanguageToRu();
     case "BE":
-    return changeLanguageToBe();
+      return changeLanguageToBe();
     // default:
     //   return;
-  };
-
+  }
 };
