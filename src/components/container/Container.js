@@ -16,14 +16,6 @@ import { changeLanguage } from "../../redux/language/languageActions";
 
 const Container = (props) => {
   useEffect(() => {
-    const storageLang = localStorage.getItem("TravelAppUserLanguageData78fe8a83ef752bd23c98c262b7264947");
-
-    if (storageLang && storageLang !== props.language) {
-      props.changeLanguage(storageLang);
-    } else {
-      localStorage.setItem("TravelAppUserLanguageData78fe8a83ef752bd23c98c262b7264947", props.language);
-    }
-
     props.fetchCountries();
   }, []);
 

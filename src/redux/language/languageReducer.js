@@ -5,6 +5,14 @@ const initialState = {
   language: "EN",
 };
 
+const storageLang = localStorage.getItem("TravelAppUserLanguageData78fe8a83ef752bd23c98c262b7264947");
+
+if (storageLang) {
+  initialState.language = storageLang;
+} else {
+  localStorage.setItem("TravelAppUserLanguageData78fe8a83ef752bd23c98c262b7264947", "EN");
+}
+
 // Reducer
 const languageReducer = (state = initialState, action) => {
   switch (action.type) {
