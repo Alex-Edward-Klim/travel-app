@@ -12,6 +12,7 @@ import Header from "../header/Header";
 import MainPageCountries from "../mainPageCountries/MainPageCountries";
 import SelectCountry from "../selectCountry/SelectCountry";
 import Footer from "../footer/Footer";
+import { changeLanguage } from "../../redux/language/languageActions";
 
 const Container = (props) => {
   useEffect(() => {
@@ -45,12 +46,14 @@ const mapStateToProps = (state) => {
   return {
     countries: getCountriesFromState(state),
     containerData: state.countries,
+    language: state.language.language
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchCountries: () => dispatch(fetchCountries()),
+    changeLanguage: (lang) => dispatch(changeLanguage(lang))
   };
 };
 
