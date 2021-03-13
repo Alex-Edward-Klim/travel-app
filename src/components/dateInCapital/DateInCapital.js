@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import CurrentTime from "../currentTime/CurrentTime";
 import "./dateInCapital.scss";
 
-function DateInCapital() {
+
+function DateInCapital(props) {
   const dayOfWeekList = {
     EN: [
       "Sunday",
@@ -50,7 +53,7 @@ function DateInCapital() {
     RU: [
       "Январь",
       "Февраль",
-      "Марш",
+      "Март",
       "Апреля",
       "Май",
       "Июнь",
@@ -77,23 +80,17 @@ function DateInCapital() {
     ],
   };
 
-  const [currentHour, setCurrentHour] = useState("0");
-  const [currentMinute, setCurrentMinute] = useState("00");
-  const [currentSecond, setCurrentSecond] = useState("00");
+  const [capital, setCapital] = useState("");
+  const [currentTimeZone, setCurrentTimeZone] = useState("");
 
-  // TODO: get values from JSON
-  const capital = "Paris";
-  const currentTimeZone = "Europe/Paris";
-  const currentLanguage = "EN";
-
-
-  let [hour, minute, second] = new Date()
-    .toLocaleTimeString("en-US",{timeZone : currentTimeZone,  hour12: false })
-    .split(/:| /);
+  const currentLanguage = useSelector((state) => state.language.language);
   
-  const addZero = (n) => {
-    return (n < 10 ? "0" : "") + n;
-  };
+  useEffect(() => {
+    if (props.country) {
+      setCapital(props.country.localizations[currentLanguage].capital)
+      setCurrentTimeZone(props.country.timeZone);
+    }
+  }, [currentLanguage])
 
   const [month, date] = new Date()
     .toLocaleDateString("en-US", currentTimeZone)
@@ -106,39 +103,17 @@ function DateInCapital() {
 
   const capitalTitle = <p className="date-in-capital__item">{capital}</p>;
 
-  const capitalTime = (
-    <p>
-      Time: {addZero(currentHour)}:{currentMinute}:{currentSecond}
-    </p>
-  );
-
   const capitalDate = (
     <p>
       {date} {monthName} {dayOfWeek}
     </p>
   );
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      [hour, minute, second] = new Date()
-      .toLocaleTimeString("en-US",{timeZone : currentTimeZone,  hour12: false })
-      .split(/:| /);
-
-      setCurrentHour(hour)
-      setCurrentMinute(minute)
-      setCurrentSecond(second)
-      
-    }, 1000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  });
-
   return (
     <div className="date-in-capital">
       {capitalTitle}
-      {capitalTime}
       {capitalDate}
+      <CurrentTime timeZone={currentTimeZone}/>
     </div>
   );
 }

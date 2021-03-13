@@ -1,17 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import DateInCapital from "../dateInCapital/DateInCapital";
 import LocalCurrencyRate from "../localCurrencyRate/LocalCurrencyRate";
 
 function WidgetsWrapper(props) {
-    console.log(props.country)
-    // todo get data from json
-    const countryInfo = {region: "Europe", capital: "Paris"}
-    return(
-        <div className="widgets-wrapper">
-            {/* <DateInCapital /> */}
-            <LocalCurrencyRate />
-        </div>
-    )
+  const countriesList = useSelector((state) => state.countries.countries);
+  const currentCountry = countriesList.find(
+    (el) => el.localizations.EN.name === props.country
+  );
+  return (
+    <div className="widgets-wrapper">
+      <DateInCapital country={currentCountry} />
+      <LocalCurrencyRate />
+    </div>
+  );
 }
 
 export default WidgetsWrapper;
