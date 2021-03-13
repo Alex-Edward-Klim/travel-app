@@ -1,20 +1,24 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./weather.scss";
 
-const language = "RU";
+// const language = "RU";
 class Weather extends Component {
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            isLoaded: true
+        }
     }
-        
+    
     gettingWeather = async () => {
         // TODO: get city from global State
         const city = "Minsk";
         
-        const api = "3a1a4c383125a433d9e95b1ec194e6a0";
+
+        const api = "68acbc07ccfa8d615fd6c1385a793700";
         const api_url = await
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&lang=${language}`);
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&lang=${this.props.language}`);
         const data = await api_url.json();
 
         const description = data.weather[0].description;
@@ -22,21 +26,35 @@ class Weather extends Component {
         const humidity = ` ${data.main.humidity}`;
         const wind = `${data.wind.speed}`;
         const icon = data.weather[0].icon;
-        return{description, kelvin, humidity, wind, icon}
+        const isLoaded = true;
+
+        return{description, kelvin, humidity, wind, icon, isLoaded}
+
     }
     componentDidMount(){
         this.gettingWeather().then(data=>this.setState(data))
     }
+    shouldComponentUpdate(nextProps, nextState){
+        if(this.props.language !== nextProps.language){
+            this.setState({isLoaded: false});
+
+            this.gettingWeather().then(data=>this.setState(data))
+        }
+        // this.gettingWeather().then(data=>this.setState(data))
+        // console.log(this.state.description ) 
+        return true
+    }
     
     render() { 
+
         const temp = Math.round(this.state.kelvin - 273.15);
 
-        if(language == "EN"){
+        if(this.props.language == "EN"){
             return (
                 <div className='weather'>
                     <div className='weather__wrapper'>
                         <img className='weather__wrapper__img' src={`http://openweathermap.org/img/w/${this.state.icon}.png`} alt='icon' />
-                        <div className='weather__wrapper__description'>{this.state.description}</div>
+                        <div className='weather__wrapper__description'>{this.state.isLoaded && this.state.description}</div>
                     </div>
     
                     <div className='weather__info'>
@@ -46,7 +64,7 @@ class Weather extends Component {
                     </div>
                 </div>
             );
-        }else if(language == "RU"){
+        }else if(this.props.language == "RU"){
             return (
                 <div className='weather'>
                     <div className='weather__wrapper'>
@@ -61,7 +79,7 @@ class Weather extends Component {
                     </div>
                 </div>
             );
-        }else if(language == "BE"){
+        }else if(this.props.language == "BE"){
             return (
                 <div className='weather'>
                     <div className='weather__wrapper'>
@@ -80,5 +98,11 @@ class Weather extends Component {
         
     }
 }
+const mapStateToProps = (state) => {
+    return {
+    language: state.language.language
+    };
+};
+export default connect(mapStateToProps)(Weather);
 
-export default Weather;
+// export default Weather;
