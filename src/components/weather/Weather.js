@@ -6,9 +6,7 @@ import "./weather.scss";
 class Weather extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            isLoaded: true
-        }
+        this.state = {}
         this._isMounted = false;
     }
     
@@ -19,17 +17,27 @@ class Weather extends Component {
 
         const api = "68acbc07ccfa8d615fd6c1385a793700";
         const api_url = await
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&lang=${this.props.language}`);
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&lang=EN`);
         const data = await api_url.json();
 
-        const description = data.weather[0].description;
+        const apiUrlRu = await
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&lang=RU`);
+        const dataRU = await apiUrlRu.json();
+
+        const apiUrlBe = await
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&lang=BE`);
+        const dataBE = await apiUrlBe.json();
+
+
+        const descriptionEn = data.weather[0].description;
+        const descriptionRu = dataRU.weather[0].description;
+        const descriptionBe = dataBE.weather[0].description;
         const kelvin = `${data.main.temp}`;
         const humidity = ` ${data.main.humidity}`;
         const wind = `${data.wind.speed}`;
         const icon = data.weather[0].icon;
-        const isLoaded = true;
 
-        return{description, kelvin, humidity, wind, icon, isLoaded}
+        return{descriptionEn, descriptionRu, descriptionBe, kelvin, humidity, wind, icon}
 
     }
     componentDidMount(){
@@ -44,20 +52,8 @@ class Weather extends Component {
     componentWillUnmount() {
         this._isMounted = false;
     }
-
-    shouldComponentUpdate(nextProps, nextState){
-        if(this.props.language !== nextProps.language){
-            this.setState({isLoaded: false});
-
-            this.gettingWeather().then(data=>this.setState(data))
-        }
-        // this.gettingWeather().then(data=>this.setState(data))
-        // console.log(this.state.description ) 
-        return true
-    }
     
     render() { 
-
         const temp = Math.round(this.state.kelvin - 273.15);
 
         if(this.props.language == "EN"){
@@ -72,7 +68,7 @@ class Weather extends Component {
                     />
                   )}
                   <div className="weather__wrapper__description">
-                    {this.state.isLoaded && this.state.description}
+                    {this.state.descriptionEn}
                   </div>
                 </div>
 
@@ -99,7 +95,7 @@ class Weather extends Component {
                     />
                   )}
                   <div className="weather__wrapper__description">
-                    {this.state.description}
+                    {this.state.descriptionRu}
                   </div>
                 </div>
 
@@ -126,7 +122,7 @@ class Weather extends Component {
                     />
                   )}
                   <div className="weather__wrapper__description">
-                    {this.state.description}
+                    {this.state.descriptionBe}
                   </div>
                 </div>
 
