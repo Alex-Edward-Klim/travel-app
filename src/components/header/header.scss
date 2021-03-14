@@ -99,6 +99,10 @@
     &__log-in a +  a {
         margin-left: 40px;
     }
+    &__user {
+        display: flex;
+        align-items: center;
+    }
 }
 
 @media (max-width: 1140px) {
@@ -202,6 +206,10 @@
                 width: 14px;
                 height: 12px;
             }
+        }
+        &__userphoto {
+            height: 32px;
+            min-width: 32px;
         }
     }
 }

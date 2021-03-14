@@ -1,35 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./header.scss";
 import langSrc from "../../images/icons/lang.png";
 import logoHeaderSrc from "../../images/logo-green-travel.png";
 import searchSrc from "../../images/icons/search.png";
-import signInSrc from "../../images/icons/sign-in.png";
-import signUpSrc from "../../images/icons/sign-up.png";
-import logOutSrc from "../../images/icons/log-out.png";
-import userDefaultAvatar from "../../images/icons/user-default-avatar.png";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage } from "../../redux/language/languageActions";
 import {getLanguageFromState} from "../../redux/selectors"
+import { useHistory } from "react-router";
 
-function Header() {
+function Header(props) {
   
   const language = useSelector(getLanguageFromState);
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
+  useEffect(() => {
+    const userData = localStorage.getItem("TravelAppUser78fe8a83ef752bd23c98c262b7264947");
+    if (userData) {
+      props.setUser(JSON.parse(userData));
+    }
+  }, []);
+
   const isSearchEnable = true;
   // todo: isSearchEnable from props
 
-  const isLogged = true;
-  // todo: isLogged from props
-
-  const userName = "User";
-  // todo: userName from props if !== undefind
-
-  const langName = "EN";
   const searchPlaceholder = "Search...";
-  const signInValue = "Sign in";
-  const signUpValue = "Sign up";
-  const logOutValue = "Log out";
 
   const search = (
     <div className="header__search">
@@ -43,45 +39,42 @@ function Header() {
     </div>
   );
 
-  const logIn = (
-    <div className="header__log-in">
-      <a href="#" className="header__log-in__link">
-        <img
-          alt="sign-in"
-          src={signInSrc}
-          className="header__log-in__sign-in"
-        />
-        {signInValue}
-      </a>
-      <a href="#" className="header__log-in__link">
-        <img
-          alt="sign-in"
-          src={signUpSrc}
-          className="header__log-in__sign-up"
-        />
-        {signUpValue}
-      </a>
-    </div>
-  );
+  const multiLanguageMessages = {
+    "EN": {
+      "Log In": "Log In",
+      "Log Out": "Log Out"
+    },
+    "RU": {
+      "Log In": "Войти",
+      "Log Out": "Выйти"
+    },
+    "BE": {
+      "Log In": "Увайсці",
+      "Log Out": "Выйсці"
+    }
+  };
 
-  const logOut = (
-    <div className="header__log-in">
-      <a href="#" className="header__log-in__link">
+  const handleLogOut = () => {
+    const guest = {
+      name: "Guest",
+      password: "12345",
+      photo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnCAMAAAC7faEHAAAAe1BMVEX09PQAAADMzMzv7+/x8fH09PT09PT09PT19fXv7+/R0dH39/fv7+/y8vLz8/Pk5OTq6urOzs7l5eXn5+fy8vL19fXf39/y8vL19fX09PTw8PD09PT////T09PW1tbZ2dnz8/PU1NTy8vL39/f29vb09PT6+vrX19fu7u6uPoeTAAAAKXRSTlP/AP///7/fj98Q/yAg30D///////+v/1BPz/8wEP///5D/YD+PXy///5YuCBIAAAFlSURBVHicjZTreoIwDIYDUhA5gwgIynS67f6vcD1Rmrbw+P0jfcmhTQKerun5GrIgCDLy6hJ0onM5AV1t5+QMiuk4Wtz0ZVFMUYy55OjEqEuZpuA2MQVybgdbQMZNexgFWY6Mc5egFSO4ERnPl1v1uFyRLeccino4+Uyng24kjOvQrzPHfP9uOASvRe4k5vsoMvEgQT82imuQPQYctlBcjexviD7iIsBdssUNkH2UXwYB+l7r/UP2wODgLrFfbLY453swDudHwbnyq9nAKDUYFqqzbSLG/UFQ1kVRNKWRTgRP3VF9U/U+at1tT19u7bxKUbwWrQtT8JYHKUWliCzlWUv7KpcYdiZUSbBn/SwcrpnpEu0a8r4XDu2oPDI/+xHzxq/menBKmzcvDu2L1RQu8+ule2CYrvtlBxTYsq82QYmp/Rcb7yxl7j+q0XZJvp37uUcjr1OYo2n2EQnpvg+H6L1EFPoHQIMOjb6N6SUAAAAASUVORK5CYII="
+    };
+    localStorage.setItem("TravelAppUser78fe8a83ef752bd23c98c262b7264947", JSON.stringify(guest));
+    props.setUser(guest);
+  };
+  
+  const logIn = (
+    <div className="header__user">
+        <div>
+          {props.user.name}
+        </div>
         <img
-          alt="sign-in"
-          src={userDefaultAvatar}
-          className="header__log-in__sign-in"
+          className="header__userphoto"
+          alt=""
+          src={props.user.photo}
         />
-        {userName}
-      </a>
-      <a href="#" className="header__log-in__link">
-        <img
-          alt="sign-in"
-          src={logOutSrc}
-          className="header__log-in__sign-up"
-        />
-        {logOutValue}
-      </a>
+        {props.user.name === "Guest" ? <button onClick={() => history.push("/login")}>{multiLanguageMessages[language]["Log In"]}</button> : <button onClick={handleLogOut}>{multiLanguageMessages[language]["Log Out"]}</button>}
     </div>
   );
 
@@ -109,7 +102,7 @@ function Header() {
 
         {isSearchEnable && search}
         
-        {isLogged ? logOut : logIn}
+        {logIn}
       </div>
     </header>
   );

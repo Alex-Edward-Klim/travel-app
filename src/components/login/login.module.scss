@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  min-height: calc(100vh - 246px);
+}
+
+.block {
+  display: block;
+};
+
+.inline {
+  display: inline;
+};
+
+.serverMessage {
+  color: red;
+}
