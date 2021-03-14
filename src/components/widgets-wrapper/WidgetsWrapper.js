@@ -11,7 +11,7 @@ function WidgetsWrapper(props) {
   return (
     <div className="widgets-wrapper">
       <DateInCapital country={currentCountry} />
-      <LocalCurrencyRate />
+      <LocalCurrencyRate country={currentCountry}/>
     </div>
   );
 }

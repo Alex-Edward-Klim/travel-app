@@ -1,0 +1,50 @@
+.currency-rate {
+    width: 344px;
+    height: 299px;
+    background: #ACCBA7;
+    border-radius: 20px;
+    font-size: 30px;
+
+    &__title {
+        font-weight: normal;
+        text-align: center;
+        padding: 6px 0px;
+    }
+
+    &__table {
+        justify-content: space-between;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+        width: 314px;
+        height: 228px;
+        margin: 0 auto;
+        padding-top: 6px;
+        border-collapse: collapse;
+        & th {
+            font-weight: normal;
+        }
+        & thead{
+            & th {
+                border-bottom: 1px solid #000000;
+                font-weight: bold;
+                padding: 6px;
+            }
+        }   
+        & tr:nth-child(even) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+            border-top: 1px solid rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+
+@media (max-width: 720px) {
+    .currency-rate {
+        width: 218.2px;
+        height: 197.26px;
+        font-size: 20px;
+        &__table {
+            width: 199.17px;
+            height: 150.42px;
+        }
+    }
+}
