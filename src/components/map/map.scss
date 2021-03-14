@@ -1,0 +1,13 @@
+.map-container {
+  margin: 0 auto;
+  width: 1074px;
+  height: 556px;
+  @media (max-width: 1140px) {
+    width: 680px;
+    height: 355px;
+  }
+  @media (max-width: 720px) {
+    width: 280px;
+    height: 254px;
+  }
+}
