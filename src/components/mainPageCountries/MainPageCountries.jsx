@@ -32,14 +32,14 @@ function MainPageCountries() {
         ? country.localizations.RU.name
         : language === "EN"
         ? country.localizations.EN.name
-        : country.localizations.BE.Name;
+        : country.localizations.BE.name;
 
     const capital =
       language === "RU"
         ? country.localizations.RU.capital
         : language === "EN"
         ? country.localizations.EN.capital
-        : country.localizations.BE.Capital;
+        : country.localizations.BE.capital;
 
     return (
       <CountryCard
