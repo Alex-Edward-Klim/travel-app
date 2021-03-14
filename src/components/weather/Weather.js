@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./weather.scss";
 
-// const language = "RU";
 class Weather extends Component {
     constructor(props){
         super(props);
@@ -10,11 +9,7 @@ class Weather extends Component {
         this._isMounted = false;
     }
     
-    gettingWeather = async () => {
-        // TODO: get city from global State
-        const city = "Minsk";
-        
-
+    gettingWeather = async (city) => {
         const api = "68acbc07ccfa8d615fd6c1385a793700";
         const api_url = await
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&lang=EN`);
@@ -40,13 +35,18 @@ class Weather extends Component {
         return{descriptionEn, descriptionRu, descriptionBe, kelvin, humidity, wind, icon}
 
     }
+
     componentDidMount(){
         this._isMounted = true;
-        this.gettingWeather().then(data=>{
+        if (this.props.country) {
+          const city = this.props.country.localizations.EN.capital
+          this.gettingWeather(city).then(data=>{
             if (this._isMounted) {
                 return this.setState(data)
             }
         })
+        }
+
     }
 
     componentWillUnmount() {
@@ -146,6 +146,5 @@ const mapStateToProps = (state) => {
     language: state.language.language
     };
 };
-export default connect(mapStateToProps)(Weather);
 
-// export default Weather;
+export default connect(mapStateToProps)(Weather);
