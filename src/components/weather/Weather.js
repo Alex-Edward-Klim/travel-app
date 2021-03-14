@@ -9,6 +9,7 @@ class Weather extends Component {
         this.state = {
             isLoaded: true
         }
+        this._isMounted = false;
     }
     
     gettingWeather = async () => {
@@ -32,8 +33,18 @@ class Weather extends Component {
 
     }
     componentDidMount(){
-        this.gettingWeather().then(data=>this.setState(data))
+        this._isMounted = true;
+        this.gettingWeather().then(data=>{
+            if (this._isMounted) {
+                return this.setState(data)
+            }
+        })
     }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
     shouldComponentUpdate(nextProps, nextState){
         if(this.props.language !== nextProps.language){
             this.setState({isLoaded: false});
