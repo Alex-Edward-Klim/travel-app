@@ -78,7 +78,7 @@ function SelectCountry() {
               </div>
             </div>
             <div className="country-page__info__right">
-              <WidgetsWrapper country={pr.name} />
+              <WidgetsWrapper country={pr.name} className="country-page__info__left__video"/>
             </div>
           </div>
         </section>
