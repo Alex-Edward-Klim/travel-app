@@ -69,6 +69,10 @@
       }
     }
   }
+  &__gallery {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
 }
 .map {
   margin: 70px auto;
@@ -136,6 +140,7 @@
   .country-page {
     &__container {
       max-width: 720px;
+      padding: 4px;
     }
     &__intro {
       margin: 15px 0;
@@ -178,17 +183,20 @@
         &__text{
           font-size: 20px;
           line-height: 23px;
-          max-width: 449px;
+          max-width: 300px;
           margin-bottom: 46px;
         }
         &__video {
-          width: 435px;
-          height: 251px;
+          width: 280px;
+          height: 154px;
         }
       }
       &__right {
         margin: 19px auto 0px;
       }
+    }
+    &__gallery {
+      max-width: 300px;
     }
   }
   .map {

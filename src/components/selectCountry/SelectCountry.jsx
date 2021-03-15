@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Map from "../map/Map";
 import WidgetsWrapper from "../widgets-wrapper/WidgetsWrapper"
 import { useSelector } from "react-redux";
+import Gallery from "../gallery/Gallery";
 
 function SelectCountry() {
   const pr = useParams();
@@ -81,6 +82,9 @@ function SelectCountry() {
               <WidgetsWrapper country={pr.name} className="country-page__info__left__video"/>
             </div>
           </div>
+        </section>
+        <section className="country-page__gallery">
+          <Gallery country={currentCountry}/>
         </section>
         <div className="map">
           <Map name={pr.name} />
