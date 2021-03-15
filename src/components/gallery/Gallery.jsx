@@ -17,31 +17,18 @@ function Gallery(props) {
 
         const imagesList = [];
         places.forEach((el) => {
-            if (currentLanguage === "BE") {
-                imagesList.push({
-                    original: el.ImageURL,
-                    thumbnail: el.ImageURL,
-                    originalTitle: el.Name,
-                    thumbnailTitle: el.Name,
-                    description: el.Description,
-                    
-                    thumbnailLabel: el.Name,
-                    originalAlt: "place",
-                    thumbnailAlt: "place"
-                    })
-            } else {
-                imagesList.push({
-                    original: el.imageURL,
-                    thumbnail: el.imageURL,
-                    originalTitle: el.name,
-                    thumbnailTitle: el.name,
-                    description: el.description,
+            imagesList.push({
+                original: el.imageURL,
+                thumbnail: el.imageURL,
+                originalTitle: el.name,
+                thumbnailTitle: el.name,
+                description: el.description,
 
-                    thumbnailLabel: el.name,
-                    originalAlt: "place",
-                    thumbnailAlt: "place"
-                    })
-            }
+                thumbnailLabel: el.name,
+                originalAlt: "place",
+                thumbnailAlt: "place"
+                })
+
         });
         setImages(imagesList);
         setIsLoaded(true)
