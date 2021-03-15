@@ -9,18 +9,7 @@ export const changeSearchToEmpty = () => ({
   type: CHANGE_SEARCH_TO_EMPTY,
 });
 
-export const changeSearchToValue = (e) => ({
+export const changeSearchToValue = (value) => ({
   type: CHANGE_SEARCH_TO_VALUE,
-  payload: e.target.value
+  payload: value
 });
-
-
-
-export const changeSearch = (action, e = '') => {
-  switch (action) {
-    case "clear":
-      return changeSearchToEmpty();
-    case "set":
-      return changeSearchToValue(e);
-  }
-};

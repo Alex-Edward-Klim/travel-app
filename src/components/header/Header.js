@@ -3,9 +3,10 @@ import "./header.scss";
 import langSrc from "../../images/icons/lang.png";
 import logoHeaderSrc from "../../images/logo-green-travel.png";
 import searchSrc from "../../images/icons/search.png";
+import clearSrc from "../../images/icons/clear.png";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage } from "../../redux/language/languageActions";
-import { changeSearch } from "../../redux/search/searchActions";
+import { changeSearchToValue, changeSearchToEmpty } from "../../redux/search/searchActions";
 import { getLanguageFromState, getSearchFromState } from "../../redux/selectors";
 import { useHistory, useLocation } from "react-router";
 
@@ -44,16 +45,21 @@ function Header(props) {
   const search = (
     <div className="header__search">
       <input
+        autoFocus
         className="header__search__input"
         placeholder={searchPlaceholder}
         value={searchValue}
         onChange={(e) => {
-          dispatch(changeSearch('set', e))
+          dispatch(changeSearchToValue(e.target.value))
         }}
       />
       <button className="header__search__btn">
         <img alt="search" src={searchSrc} />
       </button>
+      <button className="header__search__btn" onClick={() => dispatch(changeSearchToEmpty())}>
+        <img alt="clear" src={clearSrc} width='25' height='25' />
+      </button>
+
     </div>
   );
 
