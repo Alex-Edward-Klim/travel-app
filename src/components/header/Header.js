@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.scss";
 import langSrc from "../../images/icons/lang.png";
 import logoHeaderSrc from "../../images/logo-green-travel.png";
@@ -6,14 +6,14 @@ import searchSrc from "../../images/icons/search.png";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage } from "../../redux/language/languageActions";
 import { getLanguageFromState } from "../../redux/selectors";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 function Header(props) {
   const language = useSelector(getLanguageFromState);
   const dispatch = useDispatch();
 
   const history = useHistory();
-
+  const location = useLocation();
   useEffect(() => {
     const userData = localStorage.getItem(
       "TravelAppUser78fe8a83ef752bd23c98c262b7264947"
@@ -23,8 +23,12 @@ function Header(props) {
     }
   }, []);
 
-  const isSearchEnable = true;
-  // todo: isSearchEnable from props
+  const [isSearchEnable, setIsSearchEnable] = useState(null);
+  useEffect(() => {
+    location.pathname === "/"
+      ? setIsSearchEnable(true)
+      : setIsSearchEnable(false);
+  }, [location.pathname]);
 
   const searchPlaceholder =
     language === "EN"

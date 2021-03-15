@@ -1,6 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
+import 'mapbox-gl/dist/mapbox-gl.css'
 import "./map.scss";
+
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieXVyYTI1MDY5MSIsImEiOiJja203emdiMjIxMnVxMm9tdGxlcDRkZXpyIn0.MBn74R_hf0eodqa26JqMHg";
@@ -21,7 +25,7 @@ function Map({ name }) {
     Australia: [149.125529, -35.306904],
     Egypt: [31.2469, 30.050747],
     Japan: [139.753882, 35.6817],
-    Switzerland: [8.534139, 47.386966],
+    Switzerland: [7.440386, 46.947978],
     Mexico: [-99.133296, 19.432605],
     USA: [-77.036527, 38.899513],
     UK: [-0.12766, 51.507351],
