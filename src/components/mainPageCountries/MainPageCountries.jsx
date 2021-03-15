@@ -2,11 +2,22 @@ import React from "react";
 import "./mainPageCountries.scss";
 import { useSelector } from "react-redux";
 import CountryCard from "../countryCard/CountryCard";
-import {getLanguageFromState, getCountriesFromState} from "../../redux/selectors"
+import {
+  getLanguageFromState,
+  getCountriesFromState,
+  getSearchFromState,
+} from "../../redux/selectors";
 
 function MainPageCountries() {
-  const countries = useSelector(getCountriesFromState);
+  let countries = useSelector(getCountriesFromState);
   const language = useSelector(getLanguageFromState);
+  const searchValue = useSelector(getSearchFromState).toLowerCase();
+
+  countries = countries.filter(
+    (el) =>
+      el.localizations[language].name.toLowerCase().includes(searchValue) ||
+      el.localizations[language].capital.toLowerCase().includes(searchValue)
+  );
   let title = "Countries";
   let text =
     "Everyone loves to travel. Someone goes on a trip looking forward to exciting adventures. For some, there is nothing better than new exotic dishes. Some have an irresistible attraction to cultural values. Others prefer to silently watch the sunset over the ocean. The reasons are different for everyone, but the countries are the same. We invite you to familiarize yourself with them";

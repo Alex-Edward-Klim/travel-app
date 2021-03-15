@@ -3,17 +3,21 @@ import "./header.scss";
 import langSrc from "../../images/icons/lang.png";
 import logoHeaderSrc from "../../images/logo-green-travel.png";
 import searchSrc from "../../images/icons/search.png";
+import clearSrc from "../../images/icons/clear.png";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage } from "../../redux/language/languageActions";
-import { getLanguageFromState } from "../../redux/selectors";
+import { changeSearchToValue, changeSearchToEmpty } from "../../redux/search/searchActions";
+import { getLanguageFromState, getSearchFromState } from "../../redux/selectors";
 import { useHistory, useLocation } from "react-router";
 
 function Header(props) {
   const language = useSelector(getLanguageFromState);
+  const searchValue = useSelector(getSearchFromState);
   const dispatch = useDispatch();
 
   const history = useHistory();
   const location = useLocation();
+
   useEffect(() => {
     const userData = localStorage.getItem(
       "TravelAppUser78fe8a83ef752bd23c98c262b7264947"
@@ -23,13 +27,14 @@ function Header(props) {
     }
   }, []);
 
+  console.log(searchValue)
   const [isSearchEnable, setIsSearchEnable] = useState(null);
   useEffect(() => {
     location.pathname === "/"
       ? setIsSearchEnable(true)
       : setIsSearchEnable(false);
-  }, [location.pathname]);
-
+    }, [location.pathname]);
+    
   const searchPlaceholder =
     language === "EN"
       ? "Search..."
@@ -40,12 +45,21 @@ function Header(props) {
   const search = (
     <div className="header__search">
       <input
+        autoFocus
         className="header__search__input"
         placeholder={searchPlaceholder}
+        value={searchValue}
+        onChange={(e) => {
+          dispatch(changeSearchToValue(e.target.value))
+        }}
       />
       <button className="header__search__btn">
         <img alt="search" src={searchSrc} />
       </button>
+      <button className="header__search__btn" onClick={() => dispatch(changeSearchToEmpty())}>
+        <img alt="clear" src={clearSrc} width='25' height='25' />
+      </button>
+
     </div>
   );
 
