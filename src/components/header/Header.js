@@ -5,18 +5,19 @@ import logoHeaderSrc from "../../images/logo-green-travel.png";
 import searchSrc from "../../images/icons/search.png";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLanguage } from "../../redux/language/languageActions";
-import {getLanguageFromState} from "../../redux/selectors"
+import { getLanguageFromState } from "../../redux/selectors";
 import { useHistory } from "react-router";
 
 function Header(props) {
-  
   const language = useSelector(getLanguageFromState);
   const dispatch = useDispatch();
 
   const history = useHistory();
 
   useEffect(() => {
-    const userData = localStorage.getItem("TravelAppUser78fe8a83ef752bd23c98c262b7264947");
+    const userData = localStorage.getItem(
+      "TravelAppUser78fe8a83ef752bd23c98c262b7264947"
+    );
     if (userData) {
       props.setUser(JSON.parse(userData));
     }
@@ -25,7 +26,12 @@ function Header(props) {
   const isSearchEnable = true;
   // todo: isSearchEnable from props
 
-  const searchPlaceholder = "Search...";
+  const searchPlaceholder =
+    language === "EN"
+      ? "Search..."
+      : language === "RU"
+      ? "Поиск..."
+      : "Пошук...";
 
   const search = (
     <div className="header__search">
@@ -40,41 +46,47 @@ function Header(props) {
   );
 
   const multiLanguageMessages = {
-    "EN": {
+    EN: {
       "Log In": "Log In",
-      "Log Out": "Log Out"
+      "Log Out": "Log Out",
     },
-    "RU": {
+    RU: {
       "Log In": "Войти",
-      "Log Out": "Выйти"
+      "Log Out": "Выйти",
     },
-    "BE": {
+    BE: {
       "Log In": "Увайсці",
-      "Log Out": "Выйсці"
-    }
+      "Log Out": "Выйсці",
+    },
   };
 
   const handleLogOut = () => {
     const guest = {
       name: "Guest",
       password: "12345",
-      photo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnCAMAAAC7faEHAAAAe1BMVEX09PQAAADMzMzv7+/x8fH09PT09PT09PT19fXv7+/R0dH39/fv7+/y8vLz8/Pk5OTq6urOzs7l5eXn5+fy8vL19fXf39/y8vL19fX09PTw8PD09PT////T09PW1tbZ2dnz8/PU1NTy8vL39/f29vb09PT6+vrX19fu7u6uPoeTAAAAKXRSTlP/AP///7/fj98Q/yAg30D///////+v/1BPz/8wEP///5D/YD+PXy///5YuCBIAAAFlSURBVHicjZTreoIwDIYDUhA5gwgIynS67f6vcD1Rmrbw+P0jfcmhTQKerun5GrIgCDLy6hJ0onM5AV1t5+QMiuk4Wtz0ZVFMUYy55OjEqEuZpuA2MQVybgdbQMZNexgFWY6Mc5egFSO4ERnPl1v1uFyRLeccino4+Uyng24kjOvQrzPHfP9uOASvRe4k5vsoMvEgQT82imuQPQYctlBcjexviD7iIsBdssUNkH2UXwYB+l7r/UP2wODgLrFfbLY453swDudHwbnyq9nAKDUYFqqzbSLG/UFQ1kVRNKWRTgRP3VF9U/U+at1tT19u7bxKUbwWrQtT8JYHKUWliCzlWUv7KpcYdiZUSbBn/SwcrpnpEu0a8r4XDu2oPDI/+xHzxq/menBKmzcvDu2L1RQu8+ule2CYrvtlBxTYsq82QYmp/Rcb7yxl7j+q0XZJvp37uUcjr1OYo2n2EQnpvg+H6L1EFPoHQIMOjb6N6SUAAAAASUVORK5CYII="
+      photo:
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnCAMAAAC7faEHAAAAe1BMVEX09PQAAADMzMzv7+/x8fH09PT09PT09PT19fXv7+/R0dH39/fv7+/y8vLz8/Pk5OTq6urOzs7l5eXn5+fy8vL19fXf39/y8vL19fX09PTw8PD09PT////T09PW1tbZ2dnz8/PU1NTy8vL39/f29vb09PT6+vrX19fu7u6uPoeTAAAAKXRSTlP/AP///7/fj98Q/yAg30D///////+v/1BPz/8wEP///5D/YD+PXy///5YuCBIAAAFlSURBVHicjZTreoIwDIYDUhA5gwgIynS67f6vcD1Rmrbw+P0jfcmhTQKerun5GrIgCDLy6hJ0onM5AV1t5+QMiuk4Wtz0ZVFMUYy55OjEqEuZpuA2MQVybgdbQMZNexgFWY6Mc5egFSO4ERnPl1v1uFyRLeccino4+Uyng24kjOvQrzPHfP9uOASvRe4k5vsoMvEgQT82imuQPQYctlBcjexviD7iIsBdssUNkH2UXwYB+l7r/UP2wODgLrFfbLY453swDudHwbnyq9nAKDUYFqqzbSLG/UFQ1kVRNKWRTgRP3VF9U/U+at1tT19u7bxKUbwWrQtT8JYHKUWliCzlWUv7KpcYdiZUSbBn/SwcrpnpEu0a8r4XDu2oPDI/+xHzxq/menBKmzcvDu2L1RQu8+ule2CYrvtlBxTYsq82QYmp/Rcb7yxl7j+q0XZJvp37uUcjr1OYo2n2EQnpvg+H6L1EFPoHQIMOjb6N6SUAAAAASUVORK5CYII=",
     };
-    localStorage.setItem("TravelAppUser78fe8a83ef752bd23c98c262b7264947", JSON.stringify(guest));
+    localStorage.setItem(
+      "TravelAppUser78fe8a83ef752bd23c98c262b7264947",
+      JSON.stringify(guest)
+    );
     props.setUser(guest);
   };
-  
+
   const logIn = (
     <div className="header__user">
-        <div>
-          {props.user.name}
-        </div>
-        <img
-          className="header__userphoto"
-          alt=""
-          src={props.user.photo}
-        />
-        {props.user.name === "Guest" ? <button onClick={() => history.push("/login")}>{multiLanguageMessages[language]["Log In"]}</button> : <button onClick={handleLogOut}>{multiLanguageMessages[language]["Log Out"]}</button>}
+      <div>{props.user.name}</div>
+      <img className="header__userphoto" alt="" src={props.user.photo} />
+      {props.user.name === "Guest" ? (
+        <button onClick={() => history.push("/login")}>
+          {multiLanguageMessages[language]["Log In"]}
+        </button>
+      ) : (
+        <button onClick={handleLogOut}>
+          {multiLanguageMessages[language]["Log Out"]}
+        </button>
+      )}
     </div>
   );
 
@@ -83,13 +95,20 @@ function Header(props) {
       <div className="header__container">
         <div className="header__left-wrapper">
           <div className="header__lang-wrapper">
-            <img src={langSrc} alt="lang" className="header__lang-wrapper__img" />
+            <img
+              src={langSrc}
+              alt="lang"
+              className="header__lang-wrapper__img"
+            />
             <select
               value={language}
               id="language"
               onChange={(e) => {
-                localStorage.setItem("TravelAppUserLanguageData78fe8a83ef752bd23c98c262b7264947", e.target.value);
-                dispatch(changeLanguage(e.target.value))
+                localStorage.setItem(
+                  "TravelAppUserLanguageData78fe8a83ef752bd23c98c262b7264947",
+                  e.target.value
+                );
+                dispatch(changeLanguage(e.target.value));
               }}
             >
               <option value="EN">EN</option>
@@ -97,11 +116,11 @@ function Header(props) {
               <option value="BE">BE</option>
             </select>
           </div>
-          <img alt="logo" src={logoHeaderSrc} className="header__logo"/>
+          <img alt="logo" src={logoHeaderSrc} className="header__logo" />
         </div>
 
         {isSearchEnable && search}
-        
+
         {logIn}
       </div>
     </header>
