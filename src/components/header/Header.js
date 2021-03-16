@@ -9,14 +9,14 @@ import { changeLanguage } from "../../redux/language/languageActions";
 import { changeSearchToValue, changeSearchToEmpty } from "../../redux/search/searchActions";
 import { getLanguageFromState, getSearchFromState } from "../../redux/selectors";
 import { useHistory, useLocation } from "react-router";
+import SelectLanguage from "../selectLanguage/SelectLanguage";
 
 function Header(props) {
   const language = useSelector(getLanguageFromState);
-  const searchValue = useSelector(getSearchFromState);
   const dispatch = useDispatch();
-
   const history = useHistory();
   const location = useLocation();	
+  const searchValue = useSelector(getSearchFromState);
   
   useEffect(() => {
     const userData = localStorage.getItem(
@@ -125,21 +125,7 @@ function Header(props) {
               alt="lang"
               className="header__lang-wrapper__img"
             />
-            <select
-              value={language}
-              id="language"
-              onChange={(e) => {
-                localStorage.setItem(
-                  "TravelAppUserLanguageData78fe8a83ef752bd23c98c262b7264947",
-                  e.target.value
-                );
-                dispatch(changeLanguage(e.target.value));
-              }}
-            >
-              <option value="EN">EN</option>
-              <option value="RU">RU</option>
-              <option value="BE">BE</option>
-            </select>
+            <SelectLanguage />
           </div>
           <img alt="logo" src={logoHeaderSrc} className="header__logo" />
         </div>
