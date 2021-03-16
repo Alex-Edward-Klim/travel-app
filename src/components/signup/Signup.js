@@ -159,18 +159,21 @@ const Signup = (props) => {
     ?
     <>
       <div className={styles.wrapper}>
+      <div className={styles.bcgsignup}>
         <p>{multiLanguageMessages[language]["New User Created"]}!</p>
-        <button onClick={redirectToMainPage}>{multiLanguageMessages[language]["Go to main page"]}</button>
+        <button className={styles.btnend} onClick={redirectToMainPage}>{multiLanguageMessages[language]["Go to main page"]}</button>
+        </div>
       </div>
     </>
     :
     <>
         <form onSubmit={handleSubmit} className={styles.wrapper}>
+          <div className={styles.bcgsignup}>
 
           <h1>{multiLanguageMessages[language]["Create New User"]}:</h1>
 
           <div>
-          <label className={styles.block} htmlFor="userName">{multiLanguageMessages[language]["Name"]}:</label>
+          <label className={styles.title} htmlFor="userName">{multiLanguageMessages[language]["Name"]}:</label>
           <input className={styles.block} type="text" id="userName" maxLength="10" required value={name} onChange={(e) => {
             if (!/\s/.test(e.target.value)) {
               setName(e.target.value);
@@ -179,7 +182,7 @@ const Signup = (props) => {
           </div>
           
           <div>
-          <label className={styles.block} htmlFor="userPassword">{multiLanguageMessages[language]["Password"]}:</label>
+          <label className={styles.title} htmlFor="userPassword">{multiLanguageMessages[language]["Password"]}:</label>
           <input className={styles.block} type="password" id="userPassword" required value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
 
@@ -193,14 +196,15 @@ const Signup = (props) => {
           {serverMessage ? <h2 className={styles.serverMessage}>{multiLanguageMessages[language]["User with this name already exists!"]}</h2> : null}
   
           <div>
-            <button type="submit" disabled={disabledSubmit}>{multiLanguageMessages[language]["Submit"]}</button>
+            <button type="submit" className={styles.btnsbmt} disabled={disabledSubmit}>{multiLanguageMessages[language]["Submit"]}</button>
             {disabledSubmit && photo === "" ? <p className={`${styles.inline}`}>&nbsp;({multiLanguageMessages[language]["Please, select a user photo"]})</p> :
             disabledSubmit ? <p className={styles.inline}>({multiLanguageMessages[language]["Loading"]}...)</p>
             : null}
           </div>
 
-          <div>
+          <div className={styles.goback}>
             <button type="button" onClick={redirectToMainPage}>{multiLanguageMessages[language]["Go back to main page"]}</button>
+          </div>
           </div>
         </form>
     </>
