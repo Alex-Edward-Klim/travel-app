@@ -16,8 +16,8 @@ function Header(props) {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  const location = useLocation();
-
+  const location = useLocation();	
+  
   useEffect(() => {
     const userData = localStorage.getItem(
       "TravelAppUser78fe8a83ef752bd23c98c262b7264947"
@@ -27,7 +27,13 @@ function Header(props) {
     }
   }, []);
 
-  console.log(searchValue)
+  const searchField = React.useRef(null);
+  useEffect (()=> {
+    if (searchField.current !== null) {
+      searchField.current.focus()
+    }
+  }, [language])
+
   const [isSearchEnable, setIsSearchEnable] = useState(null);
   useEffect(() => {
     location.pathname === "/"
@@ -45,6 +51,7 @@ function Header(props) {
   const search = (
     <div className="header__search">
       <input
+        ref={searchField}
         autoFocus
         className="header__search__input"
         placeholder={searchPlaceholder}

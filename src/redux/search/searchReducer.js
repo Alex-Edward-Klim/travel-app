@@ -4,12 +4,12 @@ import {
 } from "./searchTypes";
 
 // Initial State
-const initialState = {
+export const initialState = {
   search: "",
 };
 
 // Reducer
-const searchReducer = (state = initialState, action) => {
+export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_SEARCH_TO_EMPTY:
       return {
