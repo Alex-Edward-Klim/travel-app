@@ -1,14 +1,14 @@
 import { FETCH_COUNTRIES_FAILURE, FETCH_COUNTRIES_REQUEST, FETCH_COUNTRIES_SUCCESS } from "./countryTypes";
 
 // Initial State
-const initialState = {
+export const initialState = {
   loading: false,
   countries: [],
   error: ''
 };
 
 // Reducer
-const countryReducer = (state = initialState, action) => {
+export const countryReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_COUNTRIES_REQUEST:
       return {

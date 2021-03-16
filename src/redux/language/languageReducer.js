@@ -1,7 +1,7 @@
 import { CHANGE_LANGUAGE_TO_BE, CHANGE_LANGUAGE_TO_EN, CHANGE_LANGUAGE_TO_RU } from "./languageTypes";
 
 // Initial State
-const initialState = {
+export const initialState = {
   language: "EN",
 };
 
@@ -14,7 +14,7 @@ if (storageLang) {
 }
 
 // Reducer
-const languageReducer = (state = initialState, action) => {
+export const languageReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_LANGUAGE_TO_EN:
       return {
