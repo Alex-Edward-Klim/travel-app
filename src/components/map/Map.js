@@ -1,15 +1,18 @@
 import React, { useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getLanguageFromState } from "../../redux/selectors";
 import mapboxgl from "mapbox-gl";
-import 'mapbox-gl/dist/mapbox-gl.css'
+import "mapbox-gl/dist/mapbox-gl.css";
 import "./map.scss";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoieXVyYTI1MDY5MSIsImEiOiJja203emdiMjIxMnVxMm9tdGxlcDRkZXpyIn0.MBn74R_hf0eodqa26JqMHg";
 
 function Map({ name }) {
+  const language = useSelector(getLanguageFromState);
   const relCountryCode = {
     France: "FRA",
     Australia: "AUS",
@@ -34,7 +37,7 @@ function Map({ name }) {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/light-v9",
       center: reCountryLngLtd[name],
       zoom: 4,
       minZoom: 2,
@@ -56,15 +59,20 @@ function Map({ name }) {
           "fill-outline-color": "rgba( 21, 209, 4, .35)",
         },
       });
+      map.getStyle().layers.forEach(function (thisLayer) {
+        if (thisLayer.type == "symbol") {
+          map.setLayoutProperty(thisLayer.id, "text-field", [
+            "get",
+            `name_${language === "BE" ? "ru" : language.toLowerCase()}`,
+          ]);
+        }
+      });
       new mapboxgl.Marker().setLngLat(reCountryLngLtd[name]).addTo(map);
 
-      map.setFilter(
-        "countries",
-        ["in", "ADM0_A3_IS", relCountryCode[name]]
-      );
+      map.setFilter("countries", ["in", "ADM0_A3_IS", relCountryCode[name]]);
     });
     return () => map.remove();
-  }, []);
+  }, [language]);
   return <div className="map-container" ref={mapContainerRef} />;
 }
 
