@@ -102,6 +102,21 @@
     &__user {
         display: flex;
         align-items: center;
+        color: #514C4C;
+        & button{
+            padding: 4px 7px 4px 7px;
+            border-radius: 10px;
+            outline: none;
+            &:hover{
+                cursor: pointer;
+                box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+    &__userphoto {
+        height: 72px;
+        padding: 7px;
+        border-radius: 15px;
     }
 }
 
@@ -150,6 +165,15 @@
             & a + a {
                 margin-left: 10px;
             }
+        }
+        &__user{
+            & button{
+                padding: 3px 3px 3px 3px;
+            }
+        }
+        &__userphoto {
+            height: 42px;
+            min-width: 32px;
         }
     }
 }
@@ -208,7 +232,7 @@
             }
         }
         &__userphoto {
-            height: 32px;
+            height: 42px;
             min-width: 32px;
         }
     }

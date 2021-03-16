@@ -87,11 +87,12 @@ const Login = (props) => {
   return (
     <>
         <form onSubmit={handleSubmit} className={styles.wrapper}>
+          <div className={styles.bcglogin}>
 
           <h1>{multiLanguageMessages[language]["Log In"]}:</h1>
 
           <div>
-          <label className={styles.block} htmlFor="userName">{multiLanguageMessages[language]["Name"]}:</label>
+          <label className={styles.title} htmlFor="userName">{multiLanguageMessages[language]["Name"]}:</label>
           <input className={styles.block} type="text" id="userName" maxLength="10" required value={name} onChange={(e) => {
             if (!/\s/.test(e.target.value)) {
               setName(e.target.value);
@@ -100,25 +101,25 @@ const Login = (props) => {
           </div>
           
           <div>
-          <label className={styles.block} htmlFor="userPassword">{multiLanguageMessages[language]["Password"]}:</label>
+          <label className={styles.title} htmlFor="userPassword">{multiLanguageMessages[language]["Password"]}:</label>
           <input className={styles.block} type="password" id="userPassword" required value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
 
           {serverMessageUser ? <h2 className={styles.serverMessage}>{multiLanguageMessages[language]["User isn't found!"]}</h2> : null}
           {serverMessagePassword ? <h2 className={styles.serverMessage}>{multiLanguageMessages[language]["Password is incorrect!"]}</h2> : null}
   
-          <div>
+          <div className={styles.signup}>
             <button type="submit" disabled={disabledSubmit}>{multiLanguageMessages[language]["Log In"]}</button>
             {disabledSubmit ? <p className={`${styles.inline}`}>&nbsp;({multiLanguageMessages[language]["Checking data"]}...)</p>
             : null}
-          </div>
 
-          <div>
             <button type="button" onClick={() => history.push("/signup")}>{multiLanguageMessages[language]["Sign Up"]}</button>
+
           </div>
 
-          <div>
+          <div className={styles.goback}>
             <button type="button" onClick={redirectToMainPage}>{multiLanguageMessages[language]["Go back to main page"]}</button>
+          </div>
           </div>
         </form>
     </>

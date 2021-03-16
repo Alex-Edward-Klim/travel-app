@@ -6,15 +6,73 @@
 
   min-height: calc(100vh - 246px);
 }
+.bcglogin{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: large;
+  padding: 7px;
 
+  border: #000 2px solid;
+  border-radius: 15px;
+  background-color: #accba7;
+
+  min-height: calc(100vh - 326px);
+  min-width: calc(100vw - 1000px);
+
+}
+.title{
+  display: block;
+  padding: 5px 5px 5px 7px;
+  margin-top: 5px;
+  border-radius: 10px;
+  outline: none;
+}
 .block {
   display: block;
-};
+  padding: 5px 5px 5px 7px;
+  border-radius: 10px;
+  outline: none;
+  width: 270px;
+  margin-top: 2px;
+  height: 35px;
+  &:hover{
+    cursor: pointer;
+  }
+}
 
 .inline {
   display: inline;
-};
+}
 
 .serverMessage {
-  color: red;
+  color: rgb(219, 49, 49);
+  padding: 7px;
+}
+
+.signup{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 290px;
+  
+  & button{
+    padding: 7px;
+    border-radius: 10px;
+    outline: none;
+    &:hover{
+      cursor: pointer;
+      box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+.goback button{
+  padding: 7px;
+  border-radius: 10px;
+  outline: none;
+  &:hover{
+    cursor: pointer;
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
+  }
 }
