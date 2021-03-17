@@ -6,7 +6,6 @@ import { fetchCountries } from "../../redux/country/countryActions";
 
 import { getCountriesFromState } from "../../redux/selectors";
 
-// import TemporaryCountriesComponent from "../temporaryCountriesComponent/TemporaryCountriesComponent";
 import { Switch, BrowserRouter, Route, Redirect } from "react-router-dom";
 import Header from "../header/Header";
 import MainPageCountries from "../mainPageCountries/MainPageCountries";
@@ -16,6 +15,8 @@ import { changeLanguage } from "../../redux/language/languageActions";
 import ScrollToTop from "../scrollToTop/ScrollToTop";
 import Signup from "../signup/Signup";
 import Login from "../login/Login";
+
+import loading from "../../images/loading.gif";
 
 const Container = (props) => {
 
@@ -32,12 +33,13 @@ const Container = (props) => {
   return (
     <>
       {props.containerData.loading ? (
-        <h1>Loading data from server...</h1>
+        <div style={{width: "100%", height: "100vh", overflow: "hidden", backgroundColor: "rgb(236, 240, 241)"}}>
+        <img src={loading} alt="loading" style={{width: "100%"}} />
+      </div>
       ) : props.containerData.error ? (
         <h1>{props.containerData.error}</h1>
       ) : (
         <>
-          {/* <TemporaryCountriesComponent /> */}
           <BrowserRouter>
             <ScrollToTop />
             <Header user={user} setUser={setUser} />
