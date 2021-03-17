@@ -20,8 +20,8 @@
   }
   &__custom-wrapper {
     position: absolute;
-    top: 79px;
-    left: 63px;
+    top: 88px;
+    left: 11px;
     &__item {
       background: rgba(243, 240, 240, 0.774) ;
       padding: 5px;
@@ -42,8 +42,8 @@
 @media(max-width:1140px) {
   .select-wrapper {
     &__custom-wrapper {
-      top: 46px;
-      left: 33px;
+      top: 78px;
+      left: 14px;
       &__item {
         padding: 5px;
         font-size: 15px;
@@ -55,8 +55,8 @@
 @media(max-width:720px) {
   .select-wrapper {
     &__custom-wrapper {
-      top: 27px;
-      left: 13px;
+      top: 67px;
+      left: 23px;
       &__item {
         padding: 3px;
         font-size: 12px;
