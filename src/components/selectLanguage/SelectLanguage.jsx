@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLanguageFromState } from "../../redux/selectors";
 import { changeLanguage } from "../../redux/language/languageActions";
@@ -12,13 +12,24 @@ function SelectLanguage() {
 
   const select = useRef(null);
 
+  const optionEN = useRef(null);
+  const optionRU = useRef(null);
+  const optionBE = useRef(null);
+
+  const anotherOpenOptions = () => {
+    setIsOpen(true);
+    select.current.disabled = true
+  }
+
   const openOptions = () => {
     setIsOpen(true);
     select.current.classList.add("select-wrapper__hidden");
   };
+
   const closeOption = () => {
     setIsOpen(false);
-    select.current.classList.remove("select-wrapper__hidden");
+    // select.current.classList.remove("select-wrapper__hidden");
+    select.current.disabled = false
   };
 
   const changeSelectValue = (e) => {
@@ -64,12 +75,14 @@ function SelectLanguage() {
         id="language"
         className="select-wrapper__select"
         ref={select}
-        onClick={openOptions}
+        // onClick={openOptions}
         onChange={(e => e)}
+        onMouseDown={anotherOpenOptions}
+        onMouseUp={closeOption}
       >
-        <option value="EN"> EN </option>
-        <option value="RU"> RU </option>
-        <option value="BE"> BE </option>
+        <option value="EN" ref={optionEN}> EN </option>
+        <option value="RU" ref={optionRU}> RU </option>
+        <option value="BE" ref={optionBE}> BE </option>
       </select>
       {isOpen && customSelect}
     </div>
