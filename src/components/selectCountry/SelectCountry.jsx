@@ -7,7 +7,9 @@ import WidgetsWrapper from "../widgets-wrapper/WidgetsWrapper"
 import { useSelector } from "react-redux";
 import Gallery from "../gallery/Gallery";
 
-function SelectCountry() {
+import RatingAccordion from "../placesRating/RatingAccordion";
+
+function SelectCountry(props) {
   const pr = useParams();
 
   const [country, setCountry] = useState();
@@ -86,6 +88,7 @@ function SelectCountry() {
         <section className="country-page__gallery">
           <Gallery country={currentCountry}/>
         </section>
+        <RatingAccordion user={props.user} />
         <div className="map">
           <Map name={pr.name} />
         </div>
