@@ -43,7 +43,7 @@ const Container = (props) => {
             <Header user={user} setUser={setUser} />
             <Switch>
               <Route render={() => <MainPageCountries />} path="/" exact/>
-              <Route render={() => <SelectCountry />} path="/country/:name" />
+              <Route render={() => <SelectCountry user={user} />} path="/country/:name" />
               <Route render={() => <Login setUser={setUser} />} path="/login" />
               <Route render={() => <Signup setUser={setUser} />} path="/signup" />
               <Route path="*" render={() => <Redirect to="/" />} />
