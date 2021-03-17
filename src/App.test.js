@@ -13,13 +13,12 @@ describe("initial states", () => {
   });
   it("country initial", () => {
     expect(country.initialState.loading).toBe(false);
-    expect(country.initialState.error).toBe('');
+    expect(country.initialState.error).toBe("");
     expect(country.initialState.countries).toHaveLength(0);
   });
   it("search initial", () => {
     expect(search.initialState.search).toBe("");
   });
-
 });
 
 describe("language reducer", () => {
@@ -115,7 +114,7 @@ describe("country reducer", () => {
       country.countryReducer(
         {
           loading: true,
-          countries: ['a', 'b', 'c'],
+          countries: ["a", "b", "c"],
           error: "test",
         },
         action
@@ -124,12 +123,5 @@ describe("country reducer", () => {
       loading: false,
       countries: [],
     });
-  });
-});
-
-describe("Snapshot component", () => {
-  it("Footer", () => {
-    const rendered = render(<Footer />);
-    expect(rendered).toMatchSnapshot();
   });
 });

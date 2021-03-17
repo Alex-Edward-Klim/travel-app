@@ -5,6 +5,7 @@ import logoHeaderSrc from "../../images/logo-green-travel.png";
 import searchSrc from "../../images/icons/search.png";
 import clearSrc from "../../images/icons/clear.png";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom"
 import { changeLanguage } from "../../redux/language/languageActions";
 import { changeSearchToValue, changeSearchToEmpty } from "../../redux/search/searchActions";
 import { getLanguageFromState, getSearchFromState } from "../../redux/selectors";
@@ -127,7 +128,9 @@ function Header(props) {
             />
             <SelectLanguage />
           </div>
-          <img alt="logo" src={logoHeaderSrc} className="header__logo" />
+          <NavLink to='/' >
+            <img alt="logo" src={logoHeaderSrc} className="header__logo" />
+          </NavLink>
         </div>
 
         {isSearchEnable && search}
